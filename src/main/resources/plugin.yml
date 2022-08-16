@@ -1,0 +1,6 @@
+name: TheEnd
+version: '${project.version}'
+main: net.wenwebworld.Main.TheEnd
+api-version: 1.19
+authors: [ ChungYuan, Wenwen ]
+description: A mmorpg server plugin create by WWW studio
