@@ -23,12 +23,13 @@ public enum Stat implements StatFrame {
     //MobDamage("怪物傷害", 0, "❁", ChatColor.RED, Integer.MAX_VALUE, 0),
     Luck("幸運", 0, "✧", ChatColor.DARK_AQUA, Short.MAX_VALUE, 0);
 
-    public static HashMap<Stat,OnStatChangeListener> StatChangeListeners = new HashMap<>();
+    public static HashMap<Integer,OnStatChangeListener> StatChangeListeners = new HashMap<>();
 
     private double value;
     private String icon, unit, name;
     private ChatColor color;
     private double max, min;
+    private OnStatChangeListener listener;
 
     Stat(String name, double value, String icon, ChatColor color, double max, double min, String unit) {
         this.name = name;
@@ -137,10 +138,11 @@ public enum Stat implements StatFrame {
     }
 
     private void notifyStatChange(){
-        StatChangeListeners.get(this).onStatChange(this);
+        if(listener !=null)
+            listener.onStatChange(this);
     }
     public void setOnStatChangeListener(OnStatChangeListener listener){
-        StatChangeListeners.put(this,listener);
+        this.listener = listener;
     }
 }
 
