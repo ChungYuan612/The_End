@@ -11,23 +11,32 @@ import static net.wenwebworld.Main.TheEnd.players;
 
 public class DamageSystem {
     //因為現在怪物沒有數值才這樣寫
-    public static void Damage(LivingEntity damager, LivingEntity entity){
+    public static DamageIconShowData Damage(LivingEntity damager, LivingEntity entity){
         if (damager instanceof Player) {
             Player player = (Player) damager;
             Traveler traveler = players.get(player);
             entity.damage(traveler.getDamage().getValue());//這未來要修改
+            entity.playEffect(EntityEffect.HURT);
+            System.out.println("damage: "+traveler.getDamage().getValue());
+            return new DamageIconShowData(entity.getLocation(), traveler.getDamage().getValue(), ChatColor.GRAY);
+
         }else if (entity instanceof Player) {
             Player player = (Player) entity;
             Traveler traveler = players.get(player);
             traveler.getHealth().decreaseValue(5);
+            traveler.playHurtAnimation();
+            player.sendRawMessage(ChatColor.RED+""+traveler.getHealth().getValue()+"/"+traveler.getMaxHealth().getValue());
+            return new DamageIconShowData(player.getLocation(), 5, ChatColor.GRAY);
+
         }
+        return new DamageIconShowData(damager.getLocation(), 0, ChatColor.GRAY);
     }
-    public static void Damage(EntityDamageEvent.DamageCause cause, LivingEntity entity, Hurt hurt) {
+    public static DamageIconShowData Damage(EntityDamageEvent.DamageCause cause, LivingEntity entity, Hurt hurt) {
         entity.playEffect(EntityEffect.HURT);
 
         entity.damage(hurt.getDamage());//這未來要修改
 
-        DamageIcon.showIcon(entity.getLocation(), hurt.getDamage(), hurt.getColor());
+        return new DamageIconShowData(entity.getLocation(), hurt.getDamage(), hurt.getColor());
     }
 }
 

@@ -10,7 +10,7 @@ public class LivingEntityStatInit implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        players.put(event.getPlayer(),new Traveler());
+        players.put(event.getPlayer(),new Traveler(event.getPlayer()));
         event.setJoinMessage("Welcome, " + event.getPlayer().getDisplayName());
     }
     //@EventHandler

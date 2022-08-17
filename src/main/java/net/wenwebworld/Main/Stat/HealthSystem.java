@@ -23,14 +23,19 @@ public class HealthSystem implements Listener {
             if(!cause.equals(hurt.getCause()))
                 continue;
             Damage(cause, (LivingEntity) entity,hurt);
+            DamageIcon.showIcon(entity.getLocation(), hurt.getDamage(), hurt.getColor());
             break;
         }
+        if(cause.equals(EntityDamageEvent.DamageCause.CUSTOM)) return;
 
         event.setCancelled(true);
+
     }
+    @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if(!(event.getDamager() instanceof LivingEntity || event.getEntity() instanceof LivingEntity)) return;
-        Damage((LivingEntity) event.getDamager(), (LivingEntity) event.getEntity());
+        if(!(event.getDamager() instanceof LivingEntity && event.getEntity() instanceof LivingEntity)) return;
+        DamageIconShowData data = Damage((LivingEntity) event.getDamager(), (LivingEntity) event.getEntity());
+        DamageIcon.showIcon(data.getLocation(), data.getDamage(), data.getColor());
         event.setCancelled(true);
     }
 }

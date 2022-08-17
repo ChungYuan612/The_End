@@ -2,7 +2,9 @@ package net.wenwebworld.Main.Stat;
 
 import org.bukkit.ChatColor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -20,6 +22,8 @@ public enum Stat implements StatFrame {
     Damage("傷害", 0, "❁", ChatColor.RED, Integer.MAX_VALUE, 0),
     //MobDamage("怪物傷害", 0, "❁", ChatColor.RED, Integer.MAX_VALUE, 0),
     Luck("幸運", 0, "✧", ChatColor.DARK_AQUA, Short.MAX_VALUE, 0);
+
+    public static HashMap<Stat,OnStatChangeListener> StatChangeListeners = new HashMap<>();
 
     private double value;
     private String icon, unit, name;
@@ -52,18 +56,21 @@ public enum Stat implements StatFrame {
 
     public boolean setValue(double value) {
         this.value = value;
+        notifyStatChange();
         return isOutside();
     }
 
     @Override
     public boolean decreaseValue(double value) {
         this.value -= value;
+        notifyStatChange();
         return isOutside();
     }
 
     @Override
     public boolean increaseValue(double value) {
         this.value += value;
+        notifyStatChange();
         return isOutside();
     }
 
@@ -128,5 +135,16 @@ public enum Stat implements StatFrame {
                 Stat.Speed
         );
     }
+
+    private void notifyStatChange(){
+        StatChangeListeners.get(this).onStatChange(this);
+    }
+    public void setOnStatChangeListener(OnStatChangeListener listener){
+        StatChangeListeners.put(this,listener);
+    }
+}
+
+interface OnStatChangeListener{
+    void onStatChange(Stat stat);
 }
 
