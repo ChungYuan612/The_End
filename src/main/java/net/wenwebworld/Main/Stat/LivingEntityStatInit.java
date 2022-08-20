@@ -1,5 +1,6 @@
 package net.wenwebworld.Main.Stat;
 
+import net.wenwebworld.Main.TravelerUI.Traveler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

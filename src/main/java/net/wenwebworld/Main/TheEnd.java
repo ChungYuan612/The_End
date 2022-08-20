@@ -3,7 +3,7 @@ package net.wenwebworld.Main;
 import net.wenwebworld.Main.Stat.DamageIcon;
 import net.wenwebworld.Main.Stat.HealthSystem;
 import net.wenwebworld.Main.Stat.LivingEntityStatInit;
-import net.wenwebworld.Main.Stat.Traveler;
+import net.wenwebworld.Main.TravelerUI.Traveler;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 

@@ -1,8 +1,8 @@
 package net.wenwebworld.Main.Stat;
 
+import net.wenwebworld.Main.TravelerUI.Traveler;
 import org.bukkit.ChatColor;
 import org.bukkit.EntityEffect;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;

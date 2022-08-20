@@ -122,6 +122,11 @@ public enum Stat implements StatFrame {
     }
 
     @Override
+    public void setMaxValue(double maxValue) {
+        this.max = maxValue;
+    }
+
+    @Override
     public String getIcon() {
         return icon;
     }

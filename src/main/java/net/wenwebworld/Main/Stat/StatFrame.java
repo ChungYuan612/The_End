@@ -72,5 +72,7 @@ public interface StatFrame {
      * @return 數值的中文名稱
      */
     String getName();
+
+    void setMaxValue(double maxValue);
 }
 

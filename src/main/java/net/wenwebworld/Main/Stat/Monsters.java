@@ -2,17 +2,17 @@ package net.wenwebworld.Main.Stat;
 
 import org.bukkit.entity.Entity;
 
-public enum Monster {
+public enum Monsters {
     ;
     private Stat health = Stat.Health;
     private Stat maxHealth = Stat.MaxHealth;
     private Stat defense = Stat.Defense;
     private Stat damage = Stat.Damage;
     private String displayName;
+    private Entity entity;
 
-    Monster(
+    Monsters(
             String displayName,
-
             double maxHealth,
             double defense,
             double damage
@@ -22,6 +22,10 @@ public enum Monster {
         this.maxHealth.setValue(maxHealth);
         this.defense.setValue(defense);
         this.damage.setValue(damage);
+    }
+
+    public void refreshDisplays() {
+
     }
 
     public Stat getHealth() {
