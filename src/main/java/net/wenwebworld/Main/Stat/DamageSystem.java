@@ -18,19 +18,20 @@ public class DamageSystem {
             entity.damage(traveler.getDamage().getValue());//這未來要修改
             entity.playEffect(EntityEffect.HURT);
             System.out.println("damage: "+traveler.getDamage().getValue());
-            return new DamageIconShowData(entity.getLocation(), traveler.getDamage().getValue(), ChatColor.GRAY);
 
+            return new DamageIconShowData(entity.getLocation(), traveler.getDamage().getValue(), ChatColor.GRAY);
         }else if (entity instanceof Player) {
             Player player = (Player) entity;
             Traveler traveler = players.get(player);
             traveler.getHealth().decreaseValue(5);
             traveler.playHurtAnimation();
             player.sendRawMessage(ChatColor.RED+""+traveler.getHealth().getValue()+"/"+traveler.getMaxHealth().getValue());
-            return new DamageIconShowData(player.getLocation(), 5, ChatColor.GRAY);
 
+            return new DamageIconShowData(player.getLocation(), 5, ChatColor.GRAY);
         }
         return new DamageIconShowData(damager.getLocation(), 0, ChatColor.GRAY);
     }
+
     public static DamageIconShowData Damage(EntityDamageEvent.DamageCause cause, LivingEntity entity, Hurt hurt) {
         entity.playEffect(EntityEffect.HURT);
 

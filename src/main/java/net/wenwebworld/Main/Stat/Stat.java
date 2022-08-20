@@ -14,16 +14,17 @@ public enum Stat implements StatFrame {
     MaxHealth("血量上限", 100, "❤", ChatColor.RED, Integer.MAX_VALUE, 0),
     Defense("防禦力", 0, "❈", ChatColor.GREEN, Integer.MAX_VALUE, 0),
     Attack("攻擊力", 0, "❁", ChatColor.RED, Short.MAX_VALUE, 0),
+    AttackBouns("攻擊力加成", 0, "❁", ChatColor.RED, Short.MAX_VALUE, 0,"%"),
     AttackSpeed("攻擊速度", 100, "⚔", ChatColor.AQUA, 200, 0, "%"),
     CritChance("爆擊機率", 5, "☣", ChatColor.YELLOW, 100, -100),
     CritDamage("爆擊傷害", 50, "☠", ChatColor.YELLOW, Short.MAX_VALUE, 0, "%"),
     Speed("速度", 100, "✦", ChatColor.WHITE, 500, 0, "%"),
     HealBouns("治療加成", 0, "❤", ChatColor.LIGHT_PURPLE, Short.MAX_VALUE, 0, "%"),
-    Damage("傷害", 0, "❁", ChatColor.RED, Integer.MAX_VALUE, 0),
+    Damage("傷害", 1, "❁", ChatColor.RED, Integer.MAX_VALUE, 0),
     //MobDamage("怪物傷害", 0, "❁", ChatColor.RED, Integer.MAX_VALUE, 0),
     Luck("幸運", 0, "✧", ChatColor.DARK_AQUA, Short.MAX_VALUE, 0);
 
-    public static HashMap<Integer,OnStatChangeListener> StatChangeListeners = new HashMap<>();
+
 
     private double value;
     private String icon, unit, name;
