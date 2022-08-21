@@ -22,6 +22,8 @@ public enum Stat implements StatFrame {
     HealBouns("治療加成", 0, "❤", ChatColor.LIGHT_PURPLE, Short.MAX_VALUE, 0, "%"),
     Damage("傷害", 1, "❁", ChatColor.RED, Integer.MAX_VALUE, 0),
     //MobDamage("怪物傷害", 0, "❁", ChatColor.RED, Integer.MAX_VALUE, 0),
+    Mana("魔力", 100, "✎", ChatColor.AQUA, Integer.MAX_VALUE, 0),
+    MaxMana("魔力", 100, "✎", ChatColor.AQUA, Integer.MAX_VALUE, 0),
     Luck("幸運", 0, "✧", ChatColor.DARK_AQUA, Short.MAX_VALUE, 0);
 
 

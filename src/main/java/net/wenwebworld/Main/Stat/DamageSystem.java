@@ -12,20 +12,22 @@ import static net.wenwebworld.Main.TheEnd.players;
 public class DamageSystem {
     //因為現在怪物沒有數值才這樣寫
     public static DamageIconShowData Damage(LivingEntity damager, LivingEntity entity){
+
         if (damager instanceof Player) {
             Player player = (Player) damager;
             Traveler traveler = players.get(player);
+            traveler.refreshUIStatForDamage();
             entity.damage(traveler.getDamage().getValue());//這未來要修改
             entity.playEffect(EntityEffect.HURT);
-            System.out.println("damage: "+traveler.getDamage().getValue());
+            //System.out.println("damage: "+traveler.getDamage().getValue());
 
-            return new DamageIconShowData(entity.getLocation(), traveler.getDamage().getValue(), ChatColor.GRAY);
+            return new DamageIconShowData(entity.getLocation(), traveler.getDamage().getValue(), ChatColor.RED);
         }else if (entity instanceof Player) {
             Player player = (Player) entity;
             Traveler traveler = players.get(player);
             traveler.getHealth().decreaseValue(5);
             traveler.playHurtAnimation();
-            player.sendRawMessage(ChatColor.RED+""+traveler.getHealth().getValue()+"/"+traveler.getMaxHealth().getValue());
+            //player.sendRawMessage(ChatColor.RED+""+traveler.getHealth().getValue()+"/"+traveler.getMaxHealth().getValue());
 
             return new DamageIconShowData(player.getLocation(), 5, ChatColor.GRAY);
         }

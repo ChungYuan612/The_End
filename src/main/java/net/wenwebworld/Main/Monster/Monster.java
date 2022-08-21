@@ -1,8 +1,9 @@
-package net.wenwebworld.Main.Stat;
+package net.wenwebworld.Main.Monster;
 
+import net.wenwebworld.Main.Stat.Stat;
 import org.bukkit.entity.Entity;
 
-public enum Monsters {
+public enum Monster {
     ;
     private Stat health = Stat.Health;
     private Stat maxHealth = Stat.MaxHealth;
@@ -11,7 +12,7 @@ public enum Monsters {
     private String displayName;
     private Entity entity;
 
-    Monsters(
+    Monster(
             String displayName,
             double maxHealth,
             double defense,
@@ -44,4 +45,7 @@ public enum Monsters {
         return damage;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
 }

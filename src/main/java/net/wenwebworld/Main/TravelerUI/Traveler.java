@@ -4,9 +4,13 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.wenwebworld.Main.Stat.Stat;
 import org.bukkit.EntityEffect;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.text.DecimalFormat;
+
+import static net.wenwebworld.Main.Const.color;
 
 public class Traveler {
 
@@ -16,19 +20,22 @@ public class Traveler {
     private Stat attack = Stat.Attack;
     private Stat defense = Stat.Defense;
     private Stat damage = Stat.Damage;
+    private Stat mana = Stat.Mana;
+    private Stat maxMana = Stat.MaxMana;
 
     private Player player;
 
     public Traveler (Player player) {
         this.player = player;
-        getDamage().increaseValue(5);
-
     }
 
     private TextComponent actionBarString = new TextComponent("");
     private boolean hasOtherShow=false;
     public void showUIActionBar() {
-        actionBarString.setText(Stat.Health.getDisplayHead()+(int)health.getValue()+"/"+maxHealth.getValue());
+        String healthText = health.getColor()+""+(int)health.getValue()+"/"+(int)maxHealth.getValue()+Stat.Health.getDisplayHead();
+        String mediumText = "";
+        String manaText = mana.getColor()+""+(int)mana.getValue()+"/"+(int)maxMana.getValue()+Stat.Mana.getDisplayHead();
+        actionBarString.setText(healthText+" "+manaText);
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR,actionBarString);
     }
 
@@ -42,6 +49,10 @@ public class Traveler {
 
     public void setHealth(Stat health) {
         this.health = health;
+    }
+
+    public void setPlayerHealth(double health) {
+        this.health.setValue(health);
     }
 
     public Stat getMaxHealth() {
@@ -68,4 +79,13 @@ public class Traveler {
         this.damage = damage;
     }
 
+    public void refreshUIStatForDamage() {
+        try{
+            if(player.getInventory().getItemInMainHand().equals(new ItemStack(Material.NETHERITE_SWORD))){
+                damage.setValue(7);
+            }else{
+                damage.setValue(1);
+            }
+        }catch (Exception exception) {}
+    }
 }

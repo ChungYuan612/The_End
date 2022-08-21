@@ -3,6 +3,8 @@ package net.wenwebworld.Main;
 import net.wenwebworld.Main.Stat.DamageIcon;
 import net.wenwebworld.Main.Stat.HealthSystem;
 import net.wenwebworld.Main.Stat.LivingEntityStatInit;
+import net.wenwebworld.Main.TravelerUI.PlayerDeath;
+import net.wenwebworld.Main.TravelerUI.PlayerUIHandler;
 import net.wenwebworld.Main.TravelerUI.Traveler;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,6 +19,8 @@ public final class TheEnd extends JavaPlugin {
         new DamageIcon(this).start();
         getServer().getPluginManager().registerEvents(new HealthSystem(),this);
         getServer().getPluginManager().registerEvents(new LivingEntityStatInit(),this);
+        getServer().getPluginManager().registerEvents(new PlayerDeath(),this);
+        new PlayerUIHandler(this);
 
     }
 
