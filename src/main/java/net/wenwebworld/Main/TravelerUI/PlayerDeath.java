@@ -13,7 +13,8 @@ public class PlayerDeath implements Listener {
         Player player = event.getEntity();
         if(players.containsKey(player)) {
             Traveler traveler = players.get(player);
-            traveler.setPlayerHealth(traveler.getMaxHealth().getValue());
+            traveler.setPlayerHealth(traveler.getMaxHealth());
+
         }
     }
 }

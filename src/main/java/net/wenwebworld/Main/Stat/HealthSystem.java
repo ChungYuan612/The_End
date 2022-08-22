@@ -12,6 +12,7 @@ import static net.wenwebworld.Main.Stat.Stat.Attack;
 
 public class HealthSystem implements Listener {
 
+
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
         EntityDamageEvent.DamageCause cause = event.getCause();
@@ -22,9 +23,8 @@ public class HealthSystem implements Listener {
         for(Hurt hurt: Hurt.values()) {
             if(!cause.equals(hurt.getCause()))
                 continue;
-            Damage(cause, (LivingEntity) entity,hurt);
+            Damage((LivingEntity) entity, hurt);
             DamageIcon.showIcon(entity.getLocation(), hurt.getDamage(), hurt.getColor());
-            break;
         }
         if(cause.equals(EntityDamageEvent.DamageCause.CUSTOM)) return;
 
@@ -35,7 +35,7 @@ public class HealthSystem implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if(!(event.getDamager() instanceof LivingEntity && event.getEntity() instanceof LivingEntity)) return;
         DamageIconShowData data = Damage((LivingEntity) event.getDamager(), (LivingEntity) event.getEntity());
-        DamageIcon.showIcon(data.getLocation(), data.getDamage(), data.getColor());
+        DamageIcon.showIcon(data);
         event.setCancelled(true);
     }
 }

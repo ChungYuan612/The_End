@@ -4,6 +4,7 @@ import net.wenwebworld.Main.TravelerUI.Traveler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import static net.wenwebworld.Main.TheEnd.players;
 
@@ -21,8 +22,10 @@ public class LivingEntityStatInit implements Listener {
 
         event.setJoinMessage("Welcome, " + event.getPlayer().getDisplayName());
     }
-    //@EventHandler
-    public void onMobSpawn(){
-
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event){
+        if(players.containsKey(event.getPlayer()) ){
+            players.remove(event.getPlayer());
+        }
     }
 }

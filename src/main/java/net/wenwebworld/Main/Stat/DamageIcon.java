@@ -62,7 +62,26 @@ public class DamageIcon {
                         armorStand.setGravity(false);
                         armorStand.setSmall(true);
                         armorStand.setCustomNameVisible(true);
-                        armorStand.setCustomName(color("&c" + format.format(damage)));
+                        armorStand.setCustomName(color(color + format.format(damage)));
+                        damageIcons.put(armorStand, 20);
+                    }
+                }
+        );
+
+    }
+
+    public static Entity showIcon(DamageIconShowData data) {
+        return data.getLocation().getWorld().spawn(
+                data.getLocation().add(getRandomOffset(), 1, getRandomOffset()),
+                ArmorStand.class, new Consumer<ArmorStand>() {
+                    @Override
+                    public void accept(ArmorStand armorStand) {
+                        armorStand.setMarker(true);
+                        armorStand.setVisible(false);
+                        armorStand.setGravity(false);
+                        armorStand.setSmall(true);
+                        armorStand.setCustomNameVisible(true);
+                        armorStand.setCustomName(color(data.getColor() + format.format(data.getDamage())));
                         damageIcons.put(armorStand, 20);
                     }
                 }

@@ -22,9 +22,20 @@ public class PlayerUIHandler {
                 for(Player player : players.keySet()){
                     Traveler traveler = players.get(player);
                     traveler.showUIActionBar();
+
                 }
             }
         }.runTaskTimer(plugin,0L,5L);
+        //玩家回血機制
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                for(Player player : players.keySet()){
+                    Traveler traveler = players.get(player);
+                    traveler.defaultRegeneration();
+                }
+            }
+        }.runTaskTimer(plugin,0L,40L);
     }
 
 }

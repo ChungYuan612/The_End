@@ -10,8 +10,7 @@ import java.util.List;
 
 public enum Stat implements StatFrame {
 
-    Health("血量", 100, "❤", ChatColor.RED, Integer.MAX_VALUE, 0),
-    MaxHealth("血量上限", 100, "❤", ChatColor.RED, Integer.MAX_VALUE, 0),
+    Health("血量", 100, "❤", ChatColor.RED, 100, 0),
     Defense("防禦力", 0, "❈", ChatColor.GREEN, Integer.MAX_VALUE, 0),
     Attack("攻擊力", 0, "❁", ChatColor.RED, Short.MAX_VALUE, 0),
     AttackBouns("攻擊力加成", 0, "❁", ChatColor.RED, Short.MAX_VALUE, 0,"%"),
@@ -22,8 +21,7 @@ public enum Stat implements StatFrame {
     HealBouns("治療加成", 0, "❤", ChatColor.LIGHT_PURPLE, Short.MAX_VALUE, 0, "%"),
     Damage("傷害", 1, "❁", ChatColor.RED, Integer.MAX_VALUE, 0),
     //MobDamage("怪物傷害", 0, "❁", ChatColor.RED, Integer.MAX_VALUE, 0),
-    Mana("魔力", 100, "✎", ChatColor.AQUA, Integer.MAX_VALUE, 0),
-    MaxMana("魔力", 100, "✎", ChatColor.AQUA, Integer.MAX_VALUE, 0),
+    Mana("魔力", 100, "✎", ChatColor.AQUA, 100, 0),
     Luck("幸運", 0, "✧", ChatColor.DARK_AQUA, Short.MAX_VALUE, 0);
 
 
@@ -60,22 +58,25 @@ public enum Stat implements StatFrame {
 
     public boolean setValue(double value) {
         this.value = value;
+        boolean out = isOutside();
         notifyStatChange();
-        return isOutside();
+        return out;
     }
 
     @Override
     public boolean decreaseValue(double value) {
         this.value -= value;
+        boolean out = isOutside();
         notifyStatChange();
-        return isOutside();
+        return out;
     }
 
     @Override
     public boolean increaseValue(double value) {
         this.value += value;
+        boolean out = isOutside();
         notifyStatChange();
-        return isOutside();
+        return out;
     }
 
     @Override
@@ -89,10 +90,10 @@ public enum Stat implements StatFrame {
     }
 
     private boolean isOutside() {
-        if (value > getMaxValue())
-            value = getMaxValue();
-        else if (value < getMinValue())
-            value = getMinValue();
+        if (value > max)
+            value = max;
+        else if (value < min)
+            value = min;
         else
             return false;
         return true;

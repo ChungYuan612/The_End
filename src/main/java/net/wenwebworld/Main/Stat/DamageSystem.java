@@ -1,5 +1,6 @@
 package net.wenwebworld.Main.Stat;
 
+import net.minecraft.world.item.ItemCooldown;
 import net.wenwebworld.Main.TravelerUI.Traveler;
 import org.bukkit.ChatColor;
 import org.bukkit.EntityEffect;
@@ -18,7 +19,7 @@ public class DamageSystem {
             Traveler traveler = players.get(player);
             traveler.refreshUIStatForDamage();
             entity.damage(traveler.getDamage().getValue());//這未來要修改
-            entity.playEffect(EntityEffect.HURT);
+
             //System.out.println("damage: "+traveler.getDamage().getValue());
 
             return new DamageIconShowData(entity.getLocation(), traveler.getDamage().getValue(), ChatColor.RED);
@@ -26,19 +27,28 @@ public class DamageSystem {
             Player player = (Player) entity;
             Traveler traveler = players.get(player);
             traveler.getHealth().decreaseValue(5);
+
             traveler.playHurtAnimation();
-            //player.sendRawMessage(ChatColor.RED+""+traveler.getHealth().getValue()+"/"+traveler.getMaxHealth().getValue());
+            player.sendRawMessage(ChatColor.RED+""+traveler.getHealth().getValue()+"/"+traveler.getMaxHealth());
 
             return new DamageIconShowData(player.getLocation(), 5, ChatColor.GRAY);
         }
         return new DamageIconShowData(damager.getLocation(), 0, ChatColor.GRAY);
     }
 
-    public static DamageIconShowData Damage(EntityDamageEvent.DamageCause cause, LivingEntity entity, Hurt hurt) {
-        entity.playEffect(EntityEffect.HURT);
+    public static DamageIconShowData Damage(LivingEntity entity, Hurt hurt) {
 
-        entity.damage(hurt.getDamage());//這未來要修改
+        //這未來要修改
+        if(entity instanceof Player){
 
+            if(players.containsKey((Player)entity)){
+                players.get((Player)entity).getHealth().decreaseValue(hurt.getDamage());
+
+                entity.playEffect(EntityEffect.HURT);
+            }
+        }else {
+            entity.damage(hurt.getDamage());//這未來要修改
+        }
         return new DamageIconShowData(entity.getLocation(), hurt.getDamage(), hurt.getColor());
     }
 }
